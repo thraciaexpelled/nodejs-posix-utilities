@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-posix-utilities",
+  "version": "0.0.0",
+  "description": "POSIX/Unix utilities written in JavaScript",
+  "keywords": [
+    "posix",
+    "gnu",
+    "unix",
+    "linux",
+    "command-line"
+  ],
+  "license": "GPL-3.0-or-later",
+  "author": "thraciaexpelled",
+  "type": "commonjs",
+  "main": "null",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

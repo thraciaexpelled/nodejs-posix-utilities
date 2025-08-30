@@ -1,0 +1,12 @@
+nodejs-posix-utilities known bugs
+---------------------------------
+files listed are to be in alphabetical order
+
+i.  basename.js
+    a)  suffix removal removes the same number
+        of characters from right-to-left the length
+        of the suffix has. this will be replaced with
+        proper regex implementation
+
+ii. cat.js
+    a)  not yet POSIX compatible
