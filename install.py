@@ -48,7 +48,7 @@ def mutilate_shell_resources() -> int:
         case 'yes': pass
         case 'n': proceed = False
         case 'no': proceed = False
-        case _: pass
+        case _: proceed = False
 
     if proceed:
         user_home: str = os.environ.get("HOME")
