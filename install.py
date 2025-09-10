@@ -60,7 +60,24 @@ def mutilate_shell_resources() -> int:
         return 0
     else: return 1
 
+def confirm_nt_environment() -> bool:
+    if "msys" in sys.platform: return True
+    return "win32" in sys.platform
+
+def get_our_path() -> str | int:
+    if confirm_nt_environment():
+        sys.stderr.write("oh no. you are using microsoft windows or an adjacent NT environment..\n")
+        if "msys" in sys.platform: return "/usr/bin"
+        sys.stderr.write("err: support for win32 is not implemented\n")
+        return -1 
+
+    return os.environ.get('PATH').split(':')[0]
+
 if __name__ == '__main__':
-    our_path: str = os.environ.get('PATH').split(':')[0]
+    our_path: str | int = get_our_path()
+    if type(our_path) == int:
+        sys.stderr.write("err: cannot fetch your path\n")
+        sys.exit(-1)
+
     if install_files(query_all_files(), our_path) == 0:
         sys.exit(mutilate_shell_resources())
