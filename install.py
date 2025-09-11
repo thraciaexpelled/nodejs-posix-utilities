@@ -34,12 +34,36 @@ def install_files(files: list[str], prefix: str) -> int:
             return -1
     return 0
 
+def pretty_print_list(target_list: list[any], gap: int = 10) -> None:
+    times_enumerated: int = 0
+    delim: str = ' '
+    for i, j in enumerate(target_list):
+        times_enumerated += 1
+        print(f"[{i}] {j}")
+        print(delim*gap)
+
+        if times_enumerated > 3:
+            print()
+            continue
+
+def apply_root_workaround() -> int:
+    home_items: list[str] = list(filter(None, os.listdir("/home")))
+    target_home_user: str = ""
+
+    if len(home_items) > 1:
+        sys.stderr.write(f"There are {len(home_items)} items on your /home.\n")
+        sys.stderr.write(f"You may wish to choose at least one item for this script to edit the values on.\n")
+
+        pretty_print_list(home_items)
+
+        x: str = input("Choose an item: ")
+        # TODO: implement rest of the stuff before 16th september
+
 def mutilate_shell_resources() -> int:
     print()
     print("WARNING: this script is about to append the following...")
     print("     'export NODE_PATH=\"$(npm root -g):$NODE_PATH\"'")
     print("...to your ~/.bashrc.\n")
-    
     print("You can simply press enter if you have already done this\n")
 
     proceed: bool = True
@@ -54,6 +78,17 @@ def mutilate_shell_resources() -> int:
     if proceed:
         user_home: str = os.environ.get("HOME")
         shell_resources: str = os.path.join(user_home, ".bashrc")
+        
+        # before writing anything, check if we are root first
+        # as 9/10 chances we are installing in a root environment
+        if os.geteuid() == 0:
+            sys.stderr.write("You cannot do this if you are root.\n")
+            print("To add changes to your shell resources, we have to manually go to your $HOME directory and continue from there.\n")
+            print("applying changes")
+
+            if apply_root_workaround() != 0:
+                sys.stderr.write("Please write export NODE_PATH=\"$(npm root -g):$NODE_PATH\" manually to your shell resources.\n")
+                return -1
 
         with open(shell_resources, 'a') as rc:
             rc.write("\n\n# These lines were added by nodejs-posix-utilities")
