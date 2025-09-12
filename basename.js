@@ -65,6 +65,8 @@ const main = () => {
         description('--help', "Prints this message");
         description('--version', "Prints version of this script + the package itself");
         gap(1);
+        console.log("Please note that options from popular coreutils implementations (most notablely GNU coreutils) like '-a' or '--prefix' aren't implemented as they aren't required to be POSIX compliant.");
+        gap(1);
         console.log(`nodejs-posix-utilities ${VERSION}; ${scriptName} ${SCRIPT_VERSION}`);
         process.exit(0);
     }
