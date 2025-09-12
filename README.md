@@ -19,7 +19,7 @@ run `python3 install.py` to install the packages to the first directory of your 
 > make sure that you're running python as admin otherwise it may or may not work.
 
 ## bugs
-check [bugs.txt](bugs.txt)
+check [bugs.txt](BUGS.txt)
 
 lastly, have fun! =)
 \- ray, thraciaexpelled on gh
