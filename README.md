@@ -15,13 +15,13 @@ $PATH inferral.
 there are two ways of installing these
 utilities:
 
-1. ### backup and replace existing utils
-run `make reckless` to install the utilities
-onto your unix-like system
+1.  ### backup and replace existing utills
+    run `make reckless` to install the utilities
+    onto your unix-like system
 
-2. ### install them with a prefix
-run `make with-prefix` to install the
-utilities with a "node.<util>" prefix.
+2.  ### install them with a prefix
+    run `make with-prefix` to install the
+    utilities with a "node.<util>" prefix.
 
 ## bugs
 check [bugs.txt](bugs.txt)
