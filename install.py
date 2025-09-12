@@ -46,6 +46,16 @@ def pretty_print_list(target_list: list[any], gap: int = 10) -> None:
             print()
             continue
 
+def sensible_home_dirname() -> str | int:
+    match sys.platform:
+        case "darwin":  return "/Users"
+        case "linux":   return "/home"
+        case "freebsd": return "/home"
+        case _:
+            if os.name != 'posix':
+                sys.stderr.write("Open a GitHub Issue telling what OS you're using.\n")
+                return -1
+
 def apply_root_workaround() -> int:
     home_items: list[str] = list(filter(None, os.listdir("/home")))
     target_home_user: str = ""
@@ -56,8 +66,26 @@ def apply_root_workaround() -> int:
 
         pretty_print_list(home_items)
 
-        x: str = input("Choose an item: ")
-        # TODO: implement rest of the stuff before 16th september
+        correct_answer: bool = False
+        default_item_index: int = 1
+
+        while not correct_answer:
+            x: str = input(f"Choose an item [{default_item_index}]: ")
+
+            try:
+                target_home_user += home_items[int(x)]
+                correct_answer = True
+            except Exception as e:
+                sys.stderr.write(f"err: {e} - Please try again.")
+    else: target_home_user += os.path.join(sensible_home_dirname(), home_items[0])
+
+    if not target_home_user: return -1
+
+    with open(os.path.join(target_home_user, ".bashrc"), 'a') as rc:
+        rc.write("\n\n# These lines were added by nodejs-posix-utilities")
+        rc.write("\nexport NODE_PATH=\"$(npm root -g):$NODE_PATH\"\n\n")
+    
+    return 0
 
 def mutilate_shell_resources() -> int:
     print()
@@ -92,7 +120,7 @@ def mutilate_shell_resources() -> int:
 
         with open(shell_resources, 'a') as rc:
             rc.write("\n\n# These lines were added by nodejs-posix-utilities")
-            rc.write("\nexport NODE_PATH=\"$(npm root -g):$NODE_PATH\"'\n\n")
+            rc.write("\nexport NODE_PATH=\"$(npm root -g):$NODE_PATH\"\n\n")
         return 0
     else: return 1
 
