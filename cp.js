@@ -89,11 +89,40 @@ const main = () => {
         console.log(`nodejs-posix-utilities ${VERSION}; ${scriptName} ${SCRIPT_VERSION}`);
         process.exit(0);
     }
+    
 
-    const src = args._args[1];
-    const dest = args._args[2];
+    const possibleFiles = args._args.slice(1);
 
-    process.exit(cp(src, dest));
+    // scenario 1: we are copying two files
+    if (possibleFiles.length == 2) {
+        const src, dest;
+        src = possibleFiles[0];
+        dest = possibleFiles[1];
+        process.exit(cp(src, dest));
+    }
+
+    // scenario 2: we are copying many files
+    if (possibleFiles.length > 2) {
+        // we copy everything but the last item to the last item,
+        // assuming last item is a directory
+        const isDir = function(dir) {
+            try {
+                const s = fs.statSync(dir);
+                return s.isDirectory();
+            } catch (err) {
+                console.error(`${scriptName}:`, err);
+                process.exit(err.errno);
+            }
+        };
+        
+        const dest = possibleFiles[possibleFiles.length - 1];
+        if (!isDir(dest)) {
+            console.error(`${scriptName}:`, `${dest}:`, "not a directory");
+            process.exit(-1);\
+        }
+
+        // TODO (12.9 @ 10:01 PM): implement the rest ;3
+    }
 };
 
 main();
