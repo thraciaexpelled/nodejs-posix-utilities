@@ -12,19 +12,14 @@ $PATH inferral.
 > YOU MUST INSTALL NPM DEPENDENCIES ***GLOBALLY***.
 > OTHERWISE, THE UTILITIES WILL NOT WORK!!!!
 
-there are two ways of installing these
-utilities:
+## installing
+run `python3 install.py` to install the packages to the first directory of your path.
 
-1.  ### backup and replace existing utills
-    run `make reckless` to install the utilities
-    onto your unix-like system
-
-2.  ### install them with a prefix
-    run `make with-prefix` to install the
-    utilities with a "node.<util>" prefix.
+> [!IMPORTANT]
+> make sure that you're running python as admin otherwise it may or may not work.
 
 ## bugs
 check [bugs.txt](bugs.txt)
 
 lastly, have fun! =)
-- ray, thraciaexpelled on gh
+\- ray, thraciaexpelled on gh
