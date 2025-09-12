@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const args = require("command-line-parser");
 const fs = require('fs');
 
 const printFileContents = (filePath) => {
@@ -15,6 +16,7 @@ const printFileContents = (filePath) => {
     });
 };
 
+// TODO (12-9-25 @ 3:33 PM): implement POSIX compatibility
 const main = (argc, argv) => {
     const filePath = argv[1];
     if (filePath) {
