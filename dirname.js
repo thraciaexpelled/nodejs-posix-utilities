@@ -44,11 +44,14 @@ const description = (x, y) => {
 // NOTE:    this is VERY hardcoded so other utilities
 //          could be implemented quickly
 let dirname = (str) => {
-    if (!str.includes('/')) return '.'; // cwd  
+    if (!str.includes('/')) return '.'; // cwd
     let paths = str.split('/').filter(paths => paths);
     if (paths.length > 1) {
-        return `/${paths[0]}`;
-    } else if (paths.length == 1) return '/';
+        let retval = paths.pop();
+        return paths.join('/');
+    } else if (paths.length == 1) {
+        return '/';
+    } else if (paths.length == 1 && !paths.includes('/')) return '.';
 };
 
 const main = () => {

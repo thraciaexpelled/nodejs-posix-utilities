@@ -75,7 +75,7 @@ const main = () => {
     }
     
     let name = args._args[1];
-    console.log(name);
+    // console.log(name);
     let suffix = function() {
         if (!args._args[2]) return (undefined);
         return args._args[2];
