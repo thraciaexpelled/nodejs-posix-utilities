@@ -200,4 +200,7 @@ if __name__ == '__main__':
         sys.exit(-1)
 
     if install_files(query_all_files(), our_path) == 0:
-        sys.exit(mutilate_shell_resources())
+        if len(sys.argv) <= 1: sys.exit(mutilate_shell_resources())
+        if sys.argv[1] == "--no-shell-resources": sys.exit(0)
+    else:
+        sys.exit(-1)

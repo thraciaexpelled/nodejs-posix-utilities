@@ -184,6 +184,9 @@ const main = () => {
 
         for (const srcs in sourceFiles) {
             cp(sourceFiles[srcs], dest, true);
+            if (args.v || args.verbose) {
+                console.log(`'${sourceFiles[srcs]}' -> '${dest}'`);
+            }
         }                
     }
 };
