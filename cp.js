@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const VERSION = "0.0.0";
-const SCRIPT_VERSION = "0.1.0";
+const SCRIPT_VERSION = "0.2.0";
 
 const args = require("command-line-parser")({
     args: process.argv.slice(1),   // skip node
