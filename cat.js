@@ -10,6 +10,7 @@ const args = require("command-line-parser")({
 });
 
 const fs = require('fs');
+const path = require('path');
 
 // derived from basename.js
 // only has what we need
@@ -41,8 +42,6 @@ const description = (x, y) => {
     let b = returnPrettyString(y, Color.Default, false);
     console.log(`\t${a()}\n\t${b}\n`);
 };
-
-const path = require('path');
 
 const readFileSyncAndPrint = (filename) => {
     try {
