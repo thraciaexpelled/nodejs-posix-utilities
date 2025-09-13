@@ -92,7 +92,7 @@ def mutilate_shell_resources() -> int:
     print("WARNING: this script is about to append the following...")
     print("     'export NODE_PATH=\"$(npm root -g):$NODE_PATH\"'")
     print("...to your ~/.bashrc.\n")
-    print("You can simply press enter if you have already done this\n")
+    print("You can simply press enter if you have already done this or run the script with --no-shell-resources\n")
 
     proceed: bool = True
     x: str = input("Proceed? [Y/n] ")

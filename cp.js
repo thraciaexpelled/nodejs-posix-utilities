@@ -136,7 +136,11 @@ const main = () => {
     if (possibleFiles.length == 2) {
         const src = possibleFiles[0];
         const dest = possibleFiles[1];
-        process.exit(cp(src, dest));
+        let returnCode = cp(src, dest)
+        if (args.v || args.verbose) {
+            console.log(`'${src}' -> '${dest}'`);
+        }
+        process.exit(returnCode);
     }
 
     // scenario 2: we are copying many files
